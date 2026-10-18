@@ -1,4 +1,32 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Age Calculator — Calculate Exact Age | EasyWebTools</title><meta name="description" content="Calculate your exact age in years, months and days with this free online age calculator."><link rel="stylesheet" href="assets/style.css"></head><body>
-<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span> EasyWebTools</a><nav><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><main class="tool-page"><div class="container"><div class="prose"><span class="eyebrow">CALCULATOR</span><h1>Age Calculator</h1><p>Enter your date of birth to calculate your current age.</p></div><div class="tool-box"><div class="field"><label>Date of birth</label><input id="dob" type="date"></div><button class="btn" onclick="calculateAge()">Calculate Age</button><div id="result"></div></div></div></main>
-<script>function calculateAge(){const d=new Date(dob.value+'T00:00:00');const now=new Date();if(!dob.value||d>now){result.innerHTML='<div class="result">Please enter a valid date of birth.</div>';return}let y=now.getFullYear()-d.getFullYear(),m=now.getMonth()-d.getMonth(),day=now.getDate()-d.getDate();if(day<0){m--;day+=new Date(now.getFullYear(),now.getMonth(),0).getDate()}if(m<0){y--;m+=12}result.innerHTML='<div class="result"><b>You are '+y+' years, '+m+' months and '+day+' days old.</b></div>'}</script>
-<footer><div class="container footer-grid"><div><b>EasyWebTools</b><p>Free online tools for everyday tasks.</p></div><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div></div><div class="container copyright">© 2026 EasyWebTools. All rights reserved.</div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator — Calculate Exact Age | EasyWebTools</title>
+<meta name="description" content="Calculate your exact age in years, months and days with this free online age calculator.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span> EasyWebTools</a><nav><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="tool-page"><div class="container"><div class="prose"><span class="eyebrow">CALCULATOR</span><h1>Age Calculator</h1><p>Enter your date of birth to calculate your current age.</p></div>
+<div class="tool-box"><div class="field"><label for="dob">Date of birth</label><input id="dob" type="date"></div><button class="btn" id="calculate" type="button">Calculate Age</button><div id="result"></div></div>
+</div></main>
+<script>
+const dob=document.getElementById('dob'),result=document.getElementById('result');
+function calculateAge(){
+ if(!dob.value){result.innerHTML='<div class="result">Please enter your date of birth.</div>';return;}
+ const [year,month,day]=dob.value.split('-').map(Number);
+ const now=new Date();
+ const birth=new Date(year,month-1,day);
+ if(!Number.isFinite(year)||!Number.isFinite(month)||!Number.isFinite(day)||birth>now){result.innerHTML='<div class="result">Please enter a valid date of birth.</div>';return;}
+ let years=now.getFullYear()-year;
+ let months=now.getMonth()-(month-1);
+ let days=now.getDate()-day;
+ if(days<0){months--;days+=new Date(now.getFullYear(),now.getMonth(),0).getDate();}
+ if(months<0){years--;months+=12;}
+ result.innerHTML='<div class="result"><b>You are '+years+' years, '+months+' months and '+days+' days old.</b></div>';
+}
+document.getElementById('calculate').addEventListener('click',calculateAge);
+</script>
+<footer><div class="container footer-grid"><div><b>EasyWebTools</b><p>Free online tools for everyday tasks.</p></div><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div></div><div class="container copyright">© 2026 EasyWebTools. All rights reserved.</div></footer>
+</body></html>
