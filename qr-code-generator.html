@@ -1,5 +1,59 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>QR Code Generator — Free | EasyWebTools</title><meta name="description" content="Create a QR code from text or a URL with this free online QR code generator."><link rel="stylesheet" href="assets/style.css"></head><body>
-<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span> EasyWebTools</a><nav><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><main class="tool-page"><div class="container"><div class="prose"><span class="eyebrow">UTILITY</span><h1>QR Code Generator</h1><p>Enter text or a URL to create a QR code.</p></div><div class="tool-box"><div class="field"><label>Text or URL</label><input id="data" placeholder="https://example.com"></div><button class="btn" onclick="makeQR()">Generate QR Code</button><div id="qr" class="result" style="text-align:center;min-height:80px">Your QR code will appear here.</div></div></div></main>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
-<script>function makeQR(){const v=data.value.trim();if(!v){qr.textContent='Please enter text or a URL.';return}QRCode.toCanvas(v,{width:240,margin:2},(e,canvas)=>{if(e){qr.textContent='Could not generate QR code.';return}qr.innerHTML='';qr.appendChild(canvas);const a=document.createElement('a');a.className='download';a.textContent='Download QR code →';a.download='qrcode.png';a.href=canvas.toDataURL('image/png');qr.appendChild(document.createElement('br'));qr.appendChild(a)})}</script>
-<footer><div class="container footer-grid"><div><b>EasyWebTools</b><p>Free online tools for everyday tasks.</p></div><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div></div><div class="container copyright">© 2026 EasyWebTools. All rights reserved.</div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator — Free | EasyWebTools</title>
+<meta name="description" content="Create a QR code from text or a URL with this free online QR code generator.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span> EasyWebTools</a><nav><a href="index.html">Home</a><a href="tools.html">All Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="tool-page"><div class="container"><div class="prose"><span class="eyebrow">UTILITY</span><h1>QR Code Generator</h1><p>Enter text or a URL to create a QR code.</p></div>
+<div class="tool-box">
+<div class="field"><label for="data">Text or URL</label><input id="data" placeholder="https://example.com"></div>
+<button class="btn" id="generateQR" type="button">Generate QR Code</button>
+<div id="qr" class="result" style="text-align:center;min-height:80px">Your QR code will appear here.</div>
+</div></div></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const dataInput=document.getElementById('data');
+const qr=document.getElementById('qr');
+const generateQR=document.getElementById('generateQR');
+
+function makeQR(){
+ const value=dataInput.value.trim();
+ if(!value){qr.textContent='Please enter text or a URL.';return;}
+ if(typeof QRCode==='undefined'){
+  qr.textContent='QR generator is temporarily unavailable. Please refresh the page and try again.';
+  return;
+ }
+ qr.innerHTML='';
+ try{
+  const box=document.createElement('div');
+  qr.appendChild(box);
+  new QRCode(box,{text:value,width:240,height:240,colorDark:'#111827',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+  const a=document.createElement('a');
+  a.className='download';
+  a.textContent='Download QR code →';
+  a.href='#';
+  a.style.display='inline-block';
+  a.style.marginTop='12px';
+  a.addEventListener('click',function(e){
+   e.preventDefault();
+   const canvas=box.querySelector('canvas');
+   const img=box.querySelector('img');
+   const url=canvas?canvas.toDataURL('image/png'):(img?img.src:'');
+   if(url){const link=document.createElement('a');link.href=url;link.download='qrcode.png';link.click();}
+  });
+  qr.appendChild(a);
+ }catch(e){
+  qr.textContent='Could not generate QR code. Please try again.';
+ }
+}
+
+generateQR.addEventListener('click',makeQR);
+dataInput.addEventListener('keydown',e=>{if(e.key==='Enter')makeQR();});
+</script>
+<footer><div class="container footer-grid"><div><b>EasyWebTools</b><p>Free online tools for everyday tasks.</p></div><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div></div><div class="container copyright">© 2026 EasyWebTools. All rights reserved.</div></footer>
+</body>
+</html>
