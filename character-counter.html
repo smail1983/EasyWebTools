@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Character Counter — Free Online Tool | EasyWebTools</title>
+<meta name="description" content="Count characters, letters, numbers, spaces and words instantly with this free online character counter. Everything runs in your browser.">
+<link rel="canonical" href="https://easywebtools.site/character-counter.html">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span> EasyWebTools</a><nav><a href="index.html">Home</a><a class="active" href="tools.html">All Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main><section class="page-hero"><div class="container"><span class="eyebrow">TEXT TOOL</span><h1>Character Counter</h1><p>Count characters, words and spaces instantly.</p></div></section>
+<section class="section"><div class="container"><div class="tool-card">
+<textarea id="text" rows="12" placeholder="Type or paste your text here..." style="width:100%;padding:16px;border:1px solid #ddd;border-radius:12px;font:inherit;box-sizing:border-box"></textarea>
+<div class="tool-grid" style="margin-top:20px"><div><b id="characters">0</b><p>Characters</p></div><div><b id="noSpaces">0</b><p>Characters without spaces</p></div><div><b id="words">0</b><p>Words</p></div><div><b id="lines">0</b><p>Lines</p></div></div>
+</div><div class="tool-card"><h2>How it works</h2><p>Enter or paste text above. The counter updates instantly and runs locally in your browser.</p><h2>Common uses</h2><p>Useful for social media limits, essays, meta descriptions, messages and forms with character limits.</p></div></div></section></main>
+<footer><div class="container footer-grid"><div><b>EasyWebTools</b><p>Free online tools for everyday tasks.</p></div><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div></div><div class="container copyright">© 2026 EasyWebTools. All rights reserved.</div></footer>
+<script>const t=document.getElementById('text');function update(){const v=t.value;document.getElementById('characters').textContent=v.length;document.getElementById('noSpaces').textContent=v.replace(/\s/g,'').length;document.getElementById('words').textContent=v.trim()?v.trim().split(/\s+/).length:0;document.getElementById('lines').textContent=v?v.split(/\r?\n/).length:0}t.addEventListener('input',update);</script>
+</body></html>
