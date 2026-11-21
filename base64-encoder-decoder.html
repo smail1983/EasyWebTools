@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder & Decoder | EasyWebTools</title>
+<meta name="description" content="Encode and decode Base64 text with Unicode and Arabic support. Convert UTF-8 text safely in your browser without uploads.">
+<link rel="canonical" href="https://easywebtools.site/base64-encoder-decoder.html">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">✦</span> EasyWebTools</a><nav><a href="index.html">Home</a><a class="active" href="tools.html">All Tools</a><a href="article-free-online-tools.html">Articles</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="tool-page"><div class="container">
+<div class="prose"><span class="eyebrow">TEXT TOOL</span><h1>Base64 Encoder & Decoder</h1><p>Encode text to Base64 or decode Base64 back to readable text. Arabic, emoji and other Unicode characters are supported with UTF-8, entirely in your browser.</p></div>
+<div class="tool-box"><div class="field"><label for="source">Text to encode or Base64 to decode</label><textarea id="source" rows="6" placeholder="Enter text here..."></textarea></div>
+<button class="btn" id="encode" type="button">Encode</button> <button class="btn secondary" id="decode" type="button">Decode</button> <button class="btn secondary" id="clear" type="button">Clear</button>
+<div class="field" style="margin-top:18px"><label for="output">Result</label><textarea id="output" rows="6" readonly placeholder="Your result will appear here"></textarea></div>
+<button class="btn secondary" id="copy" type="button">Copy</button><div id="status" aria-live="polite" style="margin-top:10px"></div></div>
+<div class="prose" style="margin-top:28px"><h2>How to use</h2><ol><li>Enter your text or Base64 string in the input box.</li><li>Choose Encode to convert text, or Decode to restore the original text.</li><li>Use Copy to copy the result to your clipboard.</li><li>Press Clear to reset both fields and start again.</li></ol><h2>Frequently asked questions</h2><h3>Does Base64 support Arabic text?</h3><p>Yes. This tool uses UTF-8 conversion, so Arabic, emoji and other Unicode characters can be encoded and decoded.</p><h3>Is my text uploaded anywhere?</h3><p>No. Encoding and decoding are performed locally in your browser, with no external libraries or server upload.</p><h3>What happens if the Base64 input is invalid?</h3><p>The decoder validates the input and shows a clear error message if the string is malformed or cannot be decoded as valid UTF-8.</p><h2>Related tools</h2><ul><li><a href="url-encoder-decoder.html">URL Encoder & Decoder</a></li><li><a href="text-case-converter.html">Text Case Converter</a></li><li><a href="word-counter.html">Word Counter</a></li></ul></div></div></main>
+<script>
+const source=document.getElementById('source'),output=document.getElementById('output'),status=document.getElementById('status');
+function encodeUtf8Base64(text){const bytes=new TextEncoder().encode(text);let binary='';bytes.forEach(b=>binary+=String.fromCharCode(b));return btoa(binary)}
+function decodeUtf8Base64(text){const clean=text.replace(/\\s+/g,'');if(clean.length%4!==0||!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(clean))throw new Error('Invalid Base64 format. Check the input and try again.');const binary=atob(clean);const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));return new TextDecoder('utf-8',{fatal:true}).decode(bytes)}
+document.getElementById('encode').addEventListener('click',()=>{try{output.value=encodeUtf8Base64(source.value);status.textContent='Text encoded successfully.'}catch(e){output.value='';status.textContent='Encoding failed. Please check the input.'}});
+document.getElementById('decode').addEventListener('click',()=>{try{output.value=decodeUtf8Base64(source.value);status.textContent='Base64 decoded successfully.'}catch(e){output.value='';status.textContent=e.message||'Invalid Base64 input. Please check the string.'}});
+document.getElementById('copy').addEventListener('click',async()=>{if(!output.value){status.textContent='There is no result to copy.';return}try{await navigator.clipboard.writeText(output.value);status.textContent='Result copied.'}catch(e){output.focus();output.select();status.textContent='Select the result and copy it manually.'}});
+document.getElementById('clear').addEventListener('click',()=>{source.value='';output.value='';status.textContent='Cleared.'});
+</script>
+<footer><div class="container footer-grid"><div><b>EasyWebTools</b><p>Free online tools for everyday tasks.</p></div><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div></div><div class="container copyright">© 2026 EasyWebTools. All rights reserved.</div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Base64 support Arabic text?","acceptedAnswer":{"@type":"Answer","text":"Yes. This tool uses UTF-8 conversion, so Arabic, emoji and other Unicode characters can be encoded and decoded."}},{"@type":"Question","name":"Is my text uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Encoding and decoding are performed locally in your browser, with no external libraries or server upload."}},{"@type":"Question","name":"What happens if the Base64 input is invalid?","acceptedAnswer":{"@type":"Answer","text":"The decoder validates the input and shows a clear error message if the string is malformed or cannot be decoded as valid UTF-8."}}]}
+</script></body></html>
