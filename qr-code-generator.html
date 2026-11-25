@@ -34,7 +34,7 @@ function makeQR(){
   box.style.padding='12px';
   box.style.borderRadius='12px';
   qr.appendChild(box);
-  new QRCode(box,{text:value,width:240,height:240,colorDark:'#111827',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+  new QRCode(box,{text:value,width:240,height:240,colorDark:'#111827',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});\n  const qrImage=box.querySelector('img'); if(qrImage) qrImage.alt='Generated QR code for the entered text or URL';\n  const qrCanvas=box.querySelector('canvas'); if(qrCanvas) qrCanvas.setAttribute('aria-label','Generated QR code for the entered text or URL');
   const download=document.createElement('button');
   download.type='button'; download.className='btn'; download.textContent='Download QR Code';
   download.style.marginTop='14px';
