@@ -90,3 +90,19 @@ pre {
     font-size: 0.9rem;
   }
 }
+
+
+/* Article editorial elements */
+.article-byline{margin:12px 0 0!important;color:#64756d!important;font-size:.92rem!important}
+.article-illustration{margin:26px 0 0;padding:14px;background:#f5fbf8;border:1px solid #dcece4;border-radius:20px}
+.article-illustration img{display:block;width:100%;height:auto;max-width:800px;margin:0 auto;border-radius:13px}
+.article-illustration figcaption{margin-top:9px;color:#68766f;font-size:.85rem;text-align:center}
+.article-resource-links{margin:30px 0;padding:22px;border:1px solid #dcece4;border-radius:16px;background:#f7fbf9}
+.article-resource-links h2{margin-top:0}
+.article-resource-links p:last-child{margin-bottom:0}
+.article-resource-links a{display:inline-block;margin:3px 5px 3px 0}
+.related-articles{margin-top:38px;padding-top:24px;border-top:1px solid #e0e9e4}
+.related-articles h2{margin-top:0}
+.related-articles ul{padding-left:22px}
+.related-articles li{margin:9px 0}
+@media(max-width:480px){.article-illustration{padding:8px;margin-top:20px}.article-resource-links{padding:17px}.article-byline{font-size:.85rem!important;line-height:1.6}}
